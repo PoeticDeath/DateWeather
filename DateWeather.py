@@ -60,4 +60,4 @@ class DateWeatherProvider(wt.ComplicationsProvider):
         return comp
 
 wt.add_complications_provider(DateWeatherProvider())
-
+wt.reload_complications()

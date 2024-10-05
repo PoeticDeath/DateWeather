@@ -19,7 +19,9 @@ class DateWeatherProvider(wt.ComplicationsProvider):
         global temp
         res = requests.get("https://wttr.in/{}".format(requests.get("https://ipinfo.io/").json()["city"]))
         temp = raec(res.text)
-        temp = temp[:temp.find("(")]
+        temp = temp[:temp.find(" °F")]
+        if "(" in temp:
+            temp = temp[:temp.find("(")]
         temp = temp[temp.rfind(" ") + 1:] + "°F"
         dates = []
         for i in range(limit):

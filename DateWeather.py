@@ -21,7 +21,7 @@ class DateWeatherProvider(wt.ComplicationsProvider):
         temp = raec(res.text)
         temp = temp[:temp.find(" °F")]
         if "(" in temp:
-            temp = temp[:temp.find("(")]
+            temp = temp[:temp.rfind("(")]
         temp = temp[temp.rfind(" ") + 1:] + "°F"
         dates = []
         for i in range(limit):

@@ -38,7 +38,8 @@ class DateWeatherProvider(wt.ComplicationsProvider):
         nday = (date + tday).date().day
         week = date.ctime().split(" ")[0]
         font = wd.Font("Arial", 1)
-        daytext = wd.Text(str(lday) + "|" + str(day) + "|" + str(nday), font=font)
+        daytext1 = wd.Text(str(lday) + "|" + str(day).zfill(2)[0], font=font)
+        daytext2 = wd.Text(str(day).zfill(2)[1] + "|" + str(nday), font=font)
         weektext = wd.Text(week, font=font)
         temptext1 = wd.Text(temp[:-2], font=font)
         temptext2 = wd.Text(temp[-2:], font=font)
@@ -50,7 +51,8 @@ class DateWeatherProvider(wt.ComplicationsProvider):
             comp.circular.add_row(row=[lname])
         else:
             if not c:
-                comp.circular.add_row(row=[daytext])
+                comp.circular.add_row(row=[daytext1])
+                comp.circular.add_row(row=[daytext2])
             if c == 1:
                 comp.circular.add_row(row=[weektext])
             if c == 2:

@@ -17,8 +17,12 @@ class DateWeatherProvider(wt.ComplicationsProvider):
             
     def timeline(self, after_date, limit):
         global temp
-        res = requests.get("https://wttr.in/{}".format(requests.get("https://ipinfo.io/").json()["city"]))
-        temp = raec(res.text)
+        try:
+            res = requests.get("https://wttr.in/{}".format(requests.get("https://ipinfo.io/").json()["city"]))
+            temp = res.text
+        except Exception:
+            temp = ""
+        temp = raec(temp)
         temp = temp[:temp.find(" °F")]
         if "(" in temp:
             temp = temp[:temp.rfind("(")]
